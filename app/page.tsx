@@ -68,11 +68,15 @@ export default function Home() {
         </button>
       </div>
 
+      {/* Timetable container */}
       <div
-        className="grid grid-cols-2 gap-4 w-full max-w-lg border border-white rounded-lg p-4 bg-white"
+        className="grid grid-cols-2 gap-4 w-full max-w-lg border-2 border-white rounded-lg p-4 bg-white text-black"
       >
-        <div className="text-lg font-bold">Subjects</div>
-        <div className="text-lg font-bold">Times</div>
+        {/* Column headings */}
+        <div className="text-lg font-bold border-b-2 border-gray-300 pb-2">Subjects</div>
+        <div className="text-lg font-bold border-b-2 border-gray-300 pb-2">Times</div>
+
+        {/* Timetable entries */}
         {entries.map(({ id, subject, startTime, endTime }) => (
           <>
             <div
