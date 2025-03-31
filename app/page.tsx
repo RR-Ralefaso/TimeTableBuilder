@@ -6,19 +6,25 @@ import Image from "next/image";
 interface TimetableEntry {
   id: number;
   subject: string;
-  time: string;
+  startTime: string;
+  endTime: string;
 }
 
 export default function Home() {
   const [entries, setEntries] = useState<TimetableEntry[]>([]);
   const [subject, setSubject] = useState("");
-  const [time, setTime] = useState("");
+  const [startTime, setStartTime] = useState("");
 
   const addEntry = () => {
-    if (!subject || !time) return;
-    setEntries([...entries, { id: Date.now(), subject, time }]);
+    if (!subject || !startTime) return;
+    
+    // Calculate end time (1 hour later)
+    const [hours, minutes] = startTime.split(":").map(Number);
+    const endTime = `${String((hours + 1) % 24).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+    
+    setEntries([...entries, { id: Date.now(), subject, startTime, endTime }]);
     setSubject("");
-    setTime("");
+    setStartTime("");
   };
 
   const removeEntry = (id: number) => {
@@ -42,23 +48,25 @@ export default function Home() {
         <input
           className="border p-2 rounded"
           type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
         />
         <button className="bg-blue-500 text-white p-2 rounded" onClick={addEntry}>
           Add
         </button>
       </div>
-      <ul className="w-full max-w-md">
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl">
         {entries.map((entry) => (
-          <li key={entry.id} className="flex justify-between p-2 border-b text-white">
-            <span>{entry.time} - {entry.subject}</span>
-            <button className="text-red-500" onClick={() => removeEntry(entry.id)}>
+          <div key={entry.id} className="bg-white text-black p-4 rounded-lg shadow-md flex flex-col items-center">
+            <span className="font-bold">{entry.subject}</span>
+            <span>{entry.startTime} - {entry.endTime}</span>
+            <button className="text-red-500 mt-2" onClick={() => removeEntry(entry.id)}>
               Remove
             </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
