@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 interface TimetableEntry {
@@ -69,19 +69,19 @@ export default function Home() {
       </div>
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl border border-white rounded-lg p-4 bg-white"
+        className="flex flex-col gap-4 w-full max-w-lg border border-white rounded-lg p-4 bg-white"
       >
         {entries.map(({ id, subject, startTime, endTime }) => (
           <div
             key={id}
-            className="bg-white text-black p-4 rounded-lg shadow-lg flex flex-col items-center border border-gray-300"
+            className="bg-white text-black p-4 rounded-lg shadow-lg flex flex-col items-start border border-gray-300"
           >
             <span className="text-lg font-semibold">{subject}</span>
             <span className="text-sm">
               {startTime} - {endTime}
             </span>
             <button
-              className="text-red-500 mt-2 hover:underline"
+              className="text-red-500 mt-2 hover:underline self-end"
               onClick={() => removeEntry(id)}
             >
               Remove
