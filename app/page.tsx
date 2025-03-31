@@ -26,10 +26,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex flex-col items-center">
+    <div className="min-h-screen p-8 flex flex-col items-center bg-purple-500">
       <header className="flex flex-col items-center mb-4">
         <Image src="/next.svg" alt="Next.js Logo" width={180} height={38} priority />
-        <h1 className="text-2xl font-bold mt-4">Study Timetable</h1>
+        <h1 className="text-2xl font-bold mt-4 text-white">Study Timetable Productions</h1>
       </header>
       <div className="flex gap-2 mb-4">
         <input
@@ -51,7 +51,7 @@ export default function Home() {
       </div>
       <ul className="w-full max-w-md">
         {entries.map((entry) => (
-          <li key={entry.id} className="flex justify-between p-2 border-b">
+          <li key={entry.id} className="flex justify-between p-2 border-b text-white">
             <span>{entry.time} - {entry.subject}</span>
             <button className="text-red-500" onClick={() => removeEntry(entry.id)}>
               Remove
