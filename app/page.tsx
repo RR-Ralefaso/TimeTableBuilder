@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex flex-col items-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+    <div className="min-h-screen p-8 flex flex-col items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white">
       <header className="flex flex-col items-center mb-6">
         <Image
           src="/next.svg"
@@ -89,7 +89,7 @@ export default function Home() {
 
       <div
         ref={timetableRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl border-4 border-black rounded-lg p-4 bg-white"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl border border-white rounded-lg p-4 bg-white"
       >
         {entries.map(({ id, subject, startTime, endTime }) => (
           <div
@@ -116,6 +116,11 @@ export default function Home() {
       >
         Download Timetable as Image
       </button>
+
+      {/* Footer with R-Cubed logo */}
+      <footer className="mt-16">
+        <h1 className="text-6xl font-extrabold text-white">R-Cubed</h1>
+      </footer>
     </div>
   );
 }
