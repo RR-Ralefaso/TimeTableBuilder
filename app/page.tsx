@@ -69,24 +69,25 @@ export default function Home() {
       </div>
 
       <div
-        className="flex flex-col gap-4 w-full max-w-lg border border-white rounded-lg p-4 bg-white"
+        className="grid grid-cols-2 gap-4 w-full max-w-lg border border-white rounded-lg p-4 bg-white"
       >
+        <div className="text-lg font-bold">Subjects</div>
+        <div className="text-lg font-bold">Times</div>
         {entries.map(({ id, subject, startTime, endTime }) => (
-          <div
-            key={id}
-            className="bg-white text-black p-4 rounded-lg shadow-lg flex flex-col items-start border border-gray-300"
-          >
-            <span className="text-lg font-semibold">{subject}</span>
-            <span className="text-sm">
-              {startTime} - {endTime}
-            </span>
-            <button
-              className="text-red-500 mt-2 hover:underline self-end"
-              onClick={() => removeEntry(id)}
+          <>
+            <div
+              key={`${id}-subject`}
+              className="bg-white text-black p-2 rounded-lg border border-gray-300"
             >
-              Remove
-            </button>
-          </div>
+              {subject}
+            </div>
+            <div
+              key={`${id}-time`}
+              className="bg-white text-black p-2 rounded-lg border border-gray-300"
+            >
+              {startTime} - {endTime}
+            </div>
+          </>
         ))}
       </div>
 
