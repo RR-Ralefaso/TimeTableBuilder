@@ -119,7 +119,13 @@ export default function Home() {
 
       {/* Footer with R-Cubed logo */}
       <footer className="mt-16">
-        <h1 className="text-6xl font-extrabold text-white">R-Cubed</h1>
+        <Image
+          src="/r-cubed-logo.png"
+          alt="R-Cubed Logo"
+          width={300}
+          height={300}
+          priority
+        />
       </footer>
     </div>
   );
