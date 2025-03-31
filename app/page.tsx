@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { toPng } from "html-to-image";
 
 interface TimetableEntry {
   id: number;
@@ -15,7 +14,6 @@ export default function Home() {
   const [entries, setEntries] = useState<TimetableEntry[]>([]);
   const [subject, setSubject] = useState("");
   const [startTime, setStartTime] = useState("");
-  const timetableRef = useRef<HTMLDivElement>(null); // Reference to timetable div
 
   const addEntry = () => {
     if (!subject.trim() || !startTime) return;
@@ -33,23 +31,6 @@ export default function Home() {
 
   const removeEntry = (id: number) => {
     setEntries((prev) => prev.filter((entry) => entry.id !== id));
-  };
-
-  const downloadImage = () => {
-    if (timetableRef.current) {
-      toPng(timetableRef.current)
-        .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = "timetable.png";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        })
-        .catch((error) => {
-          console.error("Failed to capture timetable as image:", error);
-        });
-    }
   };
 
   return (
@@ -88,7 +69,6 @@ export default function Home() {
       </div>
 
       <div
-        ref={timetableRef}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl border border-white rounded-lg p-4 bg-white"
       >
         {entries.map(({ id, subject, startTime, endTime }) => (
@@ -109,13 +89,6 @@ export default function Home() {
           </div>
         ))}
       </div>
-
-      <button
-        className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-bold mt-6"
-        onClick={downloadImage}
-      >
-        Download Timetable as Image
-      </button>
 
       {/* Footer with R-Cubed logo */}
       <footer className="mt-16">
