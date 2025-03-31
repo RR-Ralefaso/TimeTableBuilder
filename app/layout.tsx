@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "R productions",
-  description: "Ralph - Ralefaso ",
+  title: "R-cubed TimeTable ",
+  description: "Study TimeTable produce",
 };
 
 export default function RootLayout({
