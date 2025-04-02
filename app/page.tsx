@@ -36,13 +36,7 @@ export default function Home() {
   return (
     <div className="min-h-screen p-8 flex flex-col items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white">
       <header className="flex flex-col items-center mb-6">
-        <Image
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={38}
-          priority
-        />
+        <Image src="/next.svg" alt="Next.js Logo" width={180} height={38} priority />
         <h1 className="text-3xl font-extrabold mt-4">Study Timetable</h1>
       </header>
 
@@ -61,49 +55,46 @@ export default function Home() {
           onChange={(e) => setStartTime(e.target.value)}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg font-bold"
+          className={`px-4 py-2 rounded-lg font-bold ${subject.trim() && startTime ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"}`}
           onClick={addEntry}
+          disabled={!subject.trim() || !startTime}
         >
           Add
         </button>
       </div>
 
       {/* Timetable container */}
-      <div
-        className="grid grid-cols-2 gap-4 w-full max-w-lg border-2 border-white rounded-lg p-4 bg-white text-black"
-      >
-        {/* Column headings */}
-        <div className="text-lg font-bold border-b-2 border-gray-300 pb-2">Subjects</div>
-        <div className="text-lg font-bold border-b-2 border-gray-300 pb-2">Times</div>
-
-        {/* Timetable entries */}
-        {entries.map(({ id, subject, startTime, endTime }) => (
-          <>
-            <div
-              key={`${id}-subject`}
-              className="bg-white text-black p-2 rounded-lg border border-gray-300"
-            >
-              {subject}
-            </div>
-            <div
-              key={`${id}-time`}
-              className="bg-white text-black p-2 rounded-lg border border-gray-300"
-            >
-              {startTime} - {endTime}
-            </div>
-          </>
-        ))}
+      <div className="w-full max-w-lg border-2 border-white rounded-lg p-4 bg-white text-black">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-200 text-black">
+              <th className="p-2 border border-gray-300">Subject</th>
+              <th className="p-2 border border-gray-300">Time</th>
+              <th className="p-2 border border-gray-300">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map(({ id, subject, startTime, endTime }) => (
+              <tr key={id} className="hover:bg-gray-100">
+                <td className="p-2 border border-gray-300">{subject}</td>
+                <td className="p-2 border border-gray-300">{startTime} - {endTime}</td>
+                <td className="p-2 border border-gray-300 text-center">
+                  <button
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
+                    onClick={() => removeEntry(id)}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Footer with R-Cubed logo */}
       <footer className="mt-16">
-        <Image
-          src="/r-cubed-logo.png"
-          alt="R-Cubed Logo"
-          width={300}
-          height={300}
-          priority
-        />
+        <Image src="/r-cubed-logo.png" alt="R-Cubed Logo" width={300} height={300} priority />
       </footer>
     </div>
   );
